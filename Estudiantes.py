@@ -12,6 +12,7 @@ def app():
         else:
             conn=MongoClient (host,port)
         return conn [db]
+    
     def read_mongo(db,colletion ,host= 'localhost', port= 27017, username=None, password = None, no_id= True):
         db =conection_mongo (host=host,port=port,username=username,password=password,db=db)
         cursor =db[colletion].find({})
