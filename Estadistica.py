@@ -28,7 +28,9 @@ def app():
         if no_id:
             del df ['_id']
         return df
- 
+    #titulos
+    st.title('UNIVERSIDAD DE PANAMA📈')
+    st.image("https://th.bing.com/th/id/R.a6fb04281ed45e6ffb651299b5fd99e5?rik=Qscqw8WT%2b0yAbQ&riu=http%3a%2f%2fsites.ieee.org%2fpanama-pes%2ffiles%2f2013%2f06%2funiversidad-de-panama-logo.jpg&ehk=rBaEBLq%2bHN6AoAw2PsR7qvja4FckpBhUgzEFT0qMQkQ%3d&risl=&pid=ImgRaw&r=0", width=100, output_format= "PNG")
     dfE= read_mongo('cruv', 'estudiantes')
     #titulos
     col2 = st.columns((4,1))
