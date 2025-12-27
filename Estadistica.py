@@ -10,25 +10,36 @@ def app():
         nuevaCadena=cadena.replace('(', '')
         nuevaCadena= nuevaCadena.replace(',','')
         return nuevaCadena
-    def conection_mongo (host,port,username,password,db):
-        if username and password:
-            uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
-            conn=MongoClient (uri)
-        else:
-            conn=MongoClient (host,port)
+    def conection_mongo (): #host,port,username,password,db
+       # if username and password:
+            #uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
+        uri = 'mongodb+srv://joseD:Mari0330@cluster0.hrac3.mongodb.net/?appName=Cluster0'
+        conn=MongoClient (uri)
+        #else:
+        #conn=MongoClient (host,port)
+        db= "cruv"
         return conn [db]
+    
     def read_mongo(db,colletion ,host= 'localhost', port= 27017, username=None, password = None, no_id= True):
-        db =conection_mongo (host=host,port=port,username=username,password=password,db=db)
+        db =conection_mongo ()
         cursor =db[colletion].find({})
         df = pd.DataFrame (list(cursor))
 
         if no_id:
             del df ['_id']
         return df
-    #titulos
-    st.title('UNIVERSIDAD DE PANAMA📈')
-    st.image("https://th.bing.com/th/id/R.a6fb04281ed45e6ffb651299b5fd99e5?rik=Qscqw8WT%2b0yAbQ&riu=http%3a%2f%2fsites.ieee.org%2fpanama-pes%2ffiles%2f2013%2f06%2funiversidad-de-panama-logo.jpg&ehk=rBaEBLq%2bHN6AoAw2PsR7qvja4FckpBhUgzEFT0qMQkQ%3d&risl=&pid=ImgRaw&r=0", width=100, output_format= "PNG")
+ 
     dfE= read_mongo('cruv', 'estudiantes')
+    #titulos
+    col2 = st.columns((4,1))
+    with col2[0]:
+        st.title('UNIVERSIDAD DE PANAMA')
+    with col2[1]:
+        st.image("logo-up.png", width=100, output_format= "PNG")
+    st.subheader('Visualizacion de datos '+dfE['asunto'][0])
+    url='mongodb+srv://joseD:joseD1234@cluster0.hrac3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+    #url='mongodb://localhost:27017/'
+
     #aux2=[]
     #i=0
     #st.dataframe(dfE) 

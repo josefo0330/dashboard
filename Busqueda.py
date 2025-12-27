@@ -2,15 +2,17 @@ import streamlit as st
 from pymongo import MongoClient
 import pandas as pd
 def app():
-    def conection_mongo (host,port,username,password,db):
-        if username and password:
-            uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
-            conn=MongoClient (uri)
-        else:
-            conn=MongoClient (host,port)
+    def conection_mongo ():
+        #if username and password:
+            #uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
+        uri = 'mongodb+srv://joseD:Mari0330@cluster0.hrac3.mongodb.net/?appName=Cluster0'
+        conn=MongoClient (uri)
+        #else:
+        #conn=MongoClient (host,port)
+        db= "cruv"
         return conn [db]
     def read_mongo(db,colletion ,host= 'localhost', port= 27017, username=None, password = None, no_id= True):
-        db =conection_mongo (host=host,port=port,username=username,password=password,db=db)
+        db =conection_mongo ()
         cursor =db[colletion].find({})
         df = pd.DataFrame (list(cursor))
 
@@ -100,7 +102,13 @@ def app():
     materiasC=[]
     materiasQ=[]
     mate= read_mongo('cruv', 'materias')
-    st.title("BUSQUEDA DE ESTUDIANTE")
+    col2 = st.columns((4,1))
+    with col2[0]:
+        st.title('UNIVERSIDAD DE PANAMA')
+    with col2[1]:
+        st.image("logo-up.png", width=100, output_format= "PNG")
+    st.subheader("BUSQUEDA DE ESTUDIANTE")
+    st.subheader('Visualizacion de datos '+estudiantes['asunto'][0])
     col = st.columns((4.5, 4.5,1.5), gap='medium')
     text=st.text_input("Ingrese su cedula, ejemplo 9-758-46")
     data=text.split("-")
@@ -113,7 +121,6 @@ def app():
             cedula=data[0]+"00"+"0"+data[1]+asiento
         else:
             cedula="0"+data[0]+"00"+"0"+data[1]+asiento
-        st.write(cedula)
         estudiante=estudiantes.loc[estudiantes['cedula'] == cedula]
         cedula= estudiante['cedula'].values.item()
         carrera= estudiante['carrera'].values.item()
@@ -126,9 +133,8 @@ def app():
         estado=['No Regular']
         year= agruparEstudiantes(cedula,materias,estado,materiasP,materiasS,materiasT,materiasC,materiasQ)
         #st.write(materias)
-        st.write(year)
         estudiante=estudiante.assign(año=year)
         estudiante=estudiante.assign(Estado=estado,MateriasPrimerA=materiasP,MateriasSegundoA=materiasS,
                                      MateriasTercerA=materiasT,MateriasCuartoA=materiasC,MateriasQuintoA=materiasQ)
-        estudiante=estudiante.drop(['__v', 'cedula', 'ano','escuela'], axis=1)
+        estudiante=estudiante.drop(['__v', 'cedula', 'ano','escuela','asunto'], axis=1)
         st.dataframe(estudiante)

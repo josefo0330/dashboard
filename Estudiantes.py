@@ -3,17 +3,19 @@ import pandas as pd
 import plotly.express as px  
 from pymongo import MongoClient
 def app():
-    st.title("ESTUDIANTES POR CARRERA-AÑO")
     semestre="PRIMER SEMESTRE"
-    def conection_mongo (host,port,username,password,db):
-        if username and password:
-            uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
-            conn=MongoClient (uri)
-        else:
-            conn=MongoClient (host,port)
+    def conection_mongo ():#host,port,username,password,db
+        #if username and password:
+            #uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
+        uri = 'mongodb+srv://joseD:Mari0330@cluster0.hrac3.mongodb.net/?appName=Cluster0'
+        conn=MongoClient (uri)
+        #else:
+        #conn=MongoClient (host,port)
+        db= "cruv"
         return conn [db]
+    
     def read_mongo(db,colletion ,host= 'localhost', port= 27017, username=None, password = None, no_id= True):
-        db =conection_mongo (host=host,port=port,username=username,password=password,db=db)
+        db =conection_mongo ()#host=host,port=port,username=username,password=password,db=db
         cursor =db[colletion].find({})
         df = pd.DataFrame (list(cursor))
 
@@ -110,6 +112,13 @@ def app():
     mate= read_mongo('cruv', 'materias')#materias de las carreras
     estudiantes= read_mongo('cruv', 'estudiantes')
     #st.dataframe(dfE)
+    col2 = st.columns((4,1))
+    with col2[0]:
+        st.title('UNIVERSIDAD DE PANAMA')
+    with col2[1]:
+        st.image("logo-up.png", width=100, output_format= "PNG")
+    st.subheader("ESTUDIANTES POR CARRERA-AÑO")
+    st.subheader('Visualizacion de datos '+estudiantes['asunto'][0])
     dfE_facult = dfE.groupby(by= ['facultad'])['facultad']
     dataFacult = pd.DataFrame(dfE_facult)
     #dataFacult = dataFacult.loc[['01-ADMINISTRACION PÚBLICA','05-DERECHO Y CIENCIAS POLITICAS','09-ODONTOLOGIA.']]
