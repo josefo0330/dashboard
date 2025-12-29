@@ -1,0 +1,6 @@
+streamlit
+pandas
+pymongo
+numpy
+matplotlib
+streamlit-option-menu
