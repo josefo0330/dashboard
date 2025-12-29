@@ -6,7 +6,6 @@ st.set_page_config(
         page_title="ESTADISTICA-UP",
 )
 class MultiApp:
-
     def __init__(self):
         self.apps = []
 
@@ -22,7 +21,7 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='ESTADISTICAUP',
-                options=['Estadistica','Estudiantes'],
+                options=['Estadistica','Estudiantes','busqueda'],
                 icons=['clipboard2-data','person-circle','display'],
                 menu_icon='book',
                 default_index=1,
