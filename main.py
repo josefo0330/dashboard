@@ -22,7 +22,7 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='ESTADISTICAUP',
-                options=['Estadistica','Busqueda','Estudiantes'],
+                options=['Estadistica','Estudiantes'],
                 icons=['clipboard2-data','person-circle','display'],
                 menu_icon='book',
                 default_index=1,
