@@ -5,7 +5,8 @@ def app():
     def conection_mongo ():
         #if username and password:
             #uri = 'mongodb://%s:%s@%s:%s/%s'%(username,password,host,port,db)
-        uri = 'mongodb+srv://joseD:Mari0330@cluster0.hrac3.mongodb.net/?appName=Cluster0'
+        pasword='Mari0330'
+        uri = 'mongodb+srv://joseD:%s@cluster0.hrac3.mongodb.net/?appName=Cluster0' %pasword
         conn=MongoClient (uri)
         #else:
         #conn=MongoClient (host,port)
