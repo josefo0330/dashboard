@@ -4,3 +4,4 @@ pymongo
 numpy
 matplotlib
 streamlit-option-menu
+plotly
