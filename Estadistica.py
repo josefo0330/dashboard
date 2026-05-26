@@ -31,6 +31,7 @@ def app():
         return df
     #titulos
     st.title('UNIVERSIDAD DE PANAMA📈')
+    dfE= read_mongo('cruv', 'estudiantes')
     #titulos
     col2 = st.columns((4,1))
     with col2[0]:
