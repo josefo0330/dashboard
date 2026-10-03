@@ -38,8 +38,8 @@ class MultiApp:
             Estadistica.app()
         #if app == "Busqueda":
          #   Busqueda.app()  
-        if app == "Estudiantes":
-            Estudiantes.app()
+       # if app == "Estudiantes":
+           # Estudiantes.app()
   
              
           
