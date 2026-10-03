@@ -130,7 +130,7 @@ def app():
     for i in range (len(listAux)):
         aux= listAux[i]
         #listAux[i]=aux[0]
-        if(aux[0]== 'aux[0]=='09-ODONTOLOGIA.' ):
+        if(aux[0]=='09-ODONTOLOGIA.' ):
             facultades.append(aux[0])
             #print("dato: ",aux[0])
         #st.plotly_chart(fig)
