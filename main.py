@@ -39,9 +39,9 @@ class MultiApp:
         #if app == "Busqueda":
          #   Busqueda.app()  
         if app == "Estudiantes":
-           Estudiantes.app()
+            Estudiantes.app()
   
              
           
              
-    run()            
+    run()   
