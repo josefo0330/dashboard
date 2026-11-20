@@ -127,10 +127,10 @@ def app():
     #print(column1)
     listAux= dataFacult[column1[0]].tolist()
     facultades=[]
-    for i in range (len(listAux)):
+for i in range (len(listAux)):
         aux= listAux[i]
         #listAux[i]=aux[0]
-        if(aux[0]== '11-ADMON. DE EMPRESAS Y CONTABILIDAD'):
+        if(aux[0]== '01-ADMINISTRACION PÚBLICA' or  aux[0]=='09-ODONTOLOGIA.' ):
             facultades.append(aux[0])
             #print("dato: ",aux[0])
         #st.plotly_chart(fig)
